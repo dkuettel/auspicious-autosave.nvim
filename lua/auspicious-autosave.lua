@@ -39,6 +39,11 @@ function M.setup()
     -- checks if files have changed on disk, especially on FocusGained
     vim.opt.autoread = true
 
+    -- in case anything slips by the events
+    -- (will write when windows change buffers in various ways)
+    vim.opt.autowrite = true
+    vim.opt.autowriteall = true
+
     -- interesting events:
     --   InsertLeave, TextChanged, CursorHold
     --   TextChangedI, CursorHoldI, but TextChangedI is on every keystroke
