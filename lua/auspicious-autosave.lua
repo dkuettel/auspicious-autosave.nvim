@@ -6,8 +6,10 @@ local function callback(context)
     end
 
     if
+        vim.bo.readonly
+        or not vim.bo.modifiable
         -- no file
-        context.file == ""
+        or context.file == ""
         -- special buffers (help, terminal, popups, ...) dont need saving
         or vim.bo.buftype ~= ""
         -- buffers that disappear anyway, probably they are not meant to be saved
