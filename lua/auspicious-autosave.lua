@@ -55,6 +55,7 @@ function M.setup()
     vim.api.nvim_create_autocmd(events, {
         desc = "autosave",
         callback = callback,
+        nested = true, -- otherwise we dont trigger BufWrite
     })
 end
 
