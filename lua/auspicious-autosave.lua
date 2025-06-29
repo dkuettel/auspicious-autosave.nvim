@@ -50,7 +50,8 @@ function M.setup()
     --   InsertLeave, TextChanged, CursorHold
     --   TextChangedI, CursorHoldI, but TextChangedI is on every keystroke
     --   FocusGained, FocusLost (needs terminal or tmux to be configured to send those escape codes)
-    local events = { "InsertLeave", "TextChanged", "CursorHold", "CursorHoldI", "FocusLost", "FocusGained" }
+    --   BufEnter is used so that vim.bo.autosave is set correctly from the beginning (nice for your status line)
+    local events = { "InsertLeave", "TextChanged", "CursorHold", "CursorHoldI", "FocusLost", "FocusGained", "BufEnter" }
 
     vim.api.nvim_create_autocmd(events, {
         desc = "autosave",
