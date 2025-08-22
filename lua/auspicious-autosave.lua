@@ -1,9 +1,11 @@
 local M = {}
 
+---@param context vim.api.keyset.create_autocmd.callback_args
 local function callback(context)
-    if vim.b.autosave == false then
-        return
-    end
+
+    -- NOTE we reevaluate the situation every time again
+    -- we dont use vim.b.autosave from last time, because things could change
+    -- vim.b.autosave is mainly set so that it can be used for the status line
 
     if
         vim.bo.readonly
@@ -24,6 +26,7 @@ local function callback(context)
         vim.b.autosave = false
         return
     end
+
     vim.b.autosave = true
 
     -- :update only saves if the file has been modified, no-op otherwise
