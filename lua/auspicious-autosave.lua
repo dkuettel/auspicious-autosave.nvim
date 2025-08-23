@@ -95,7 +95,7 @@ local function on_focus_gained(context) ---@diagnostic disable-line: unused-loca
             end
         end
     end
-    if missing then
+    if #missing > 0 then
         print("Some buffer's files have disappeared: " .. table.concat(missing, ", "))
     end
 end
