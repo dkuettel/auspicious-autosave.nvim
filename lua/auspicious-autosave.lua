@@ -82,16 +82,10 @@ local function on_focus_gained(context) ---@diagnostic disable-line: unused-loca
     local bufs = vim.api.nvim_list_bufs()
     local missing = {}
     for _, buf in ipairs(bufs) do
-        update_state(buf)
-        if vim.b[buf].autosave == "disappeared" then
-            table.insert(missing, buf)
-        end
         if vim.api.nvim_buf_is_loaded(buf) then
-            local name = vim.api.nvim_buf_get_name(buf)
-            if name then
-                if not vim.uv.fs_stat(name) then ---@diagnostic disable-line: undefined-field
-                    print("missing file for buffer " .. buf .. " at " .. name)
-                end
+            update_state(buf)
+            if vim.b[buf].autosave == "disappeared" then
+                table.insert(missing, buf)
             end
         end
     end
