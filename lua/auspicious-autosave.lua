@@ -123,7 +123,7 @@ function m.update_state(buf)
             if state == nil then
                 -- in this case it is a new file
                 vim.api.nvim_buf_call(buf, function()
-                    vim.cmd([[:silent w]])
+                    vim.cmd([[:silent write ++p]])
                 end)
                 state = "autosave"
             else
@@ -145,9 +145,10 @@ function m.on_buffer_event(context)
 
     if m.states[context.buf] == "autosave" then
         -- :update only saves if the file has been modified, no-op otherwise
+        -- ++p makes parent folders if necessary
         -- :silent prevents "xyz bytes write" from popping up everytime, but also hides error messages
         -- :lockmarks prevents marks like [ and ] from changing
-        vim.cmd("lockmarks silent update")
+        vim.cmd("lockmarks silent update ++p")
     end
 end
 
