@@ -102,8 +102,8 @@ function m.update_state(buf)
         or bo.buftype ~= ""
         -- buffers that disappear anyway, probably they are not meant to be saved
         or (bo.bufhidden == "wipe" or bo.bufhidden == "delete")
-        -- fugitive special buffers (eg, diff view where write means stage changes, do it explicitely)
-        or string.find(name, "^fugitive://") ~= nil
+        -- any protocol buffers
+        or string.find(name, "^.*://") ~= nil
         -- efs is slow
         or string.find(name, "^/efs/") ~= nil
         -- neogit commits the automatic comments in the message when using autosave (?)
