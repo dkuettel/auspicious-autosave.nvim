@@ -121,6 +121,8 @@ function m.update_state(buf)
             state = "autosave"
         else
             if state == nil then
+                -- NOTE use to check what lands here when it shouldnt
+                -- vim.print { name = name, buftype = bo.buftype, bufhidden = bo.bufhidden, filetype = bo.filetype }
                 -- in this case it is a new file
                 vim.api.nvim_buf_call(buf, function()
                     vim.cmd([[:silent write ++p]])
