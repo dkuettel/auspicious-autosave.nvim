@@ -49,6 +49,7 @@ end
 function M.toggle(buf)
     buf = m.real_buf(buf)
     m.enableds[buf] = not m.enableds[buf]
+    vim.cmd.redraw { bang = true }
     return m.enableds[buf]
 end
 
